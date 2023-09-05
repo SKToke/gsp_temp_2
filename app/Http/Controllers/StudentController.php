@@ -18,7 +18,7 @@ class StudentController extends Controller
     public function update(Student $student, Request $request)
     {
         $attributes = (new StudentValidator())->validate($student, $request->all());
-        updateStudent($student, $attributes, true);
+        updateStudent($student, $attributes);
         return back()->with('status', 'Data has been successfully updated.');
     }
 }

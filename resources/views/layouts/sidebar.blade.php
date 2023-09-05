@@ -20,6 +20,7 @@
                   </span>
             </a>
         </li>
+        @if(true)
         <li class="nav-item">
             <a class="nav-link" href="{{ route('exim.view') }}">
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -111,5 +112,6 @@
                 </a>
             </div>
         </li>
+        @endif
     </ul>
 </div>

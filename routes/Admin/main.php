@@ -27,5 +27,6 @@ Route::prefix('students')->as('students.')->controller(StudentsController::class
     Route::get('{student}/view', 'view')->name('view_single');
     Route::post('{student}', 'update')->name('update');
     Route::get('{student}/password', 'password')->name('password');
+    Route::get('{student}/verify', 'verify')->name('verify');
 });
 

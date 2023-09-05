@@ -22,6 +22,7 @@
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
+            <div class="form-label">zone,&nbsp;app_id,&nbsp;gsp_id,&nbsp;name,&nbsp;email,&nbsp;mobile,&nbsp;alternate_mobile,&nbsp;university,&nbsp;department,&nbsp;password</div>
             <div class="row row-cards">
                 <div class="col-12">
                     <x-alert-success/>

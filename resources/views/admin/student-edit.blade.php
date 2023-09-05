@@ -13,10 +13,18 @@
                         Overview
                     </div>--}}
                     <h2 class="page-title">
-                        {{ $student->recipient_name }} - ({{ $student->gsp_id }}) - @if($student->is_updated)
+                        {{ $student->user?->name }} - ({{ $student->gsp_id }}) - &nbsp;
+                        @if(2==$student->is_updated)
                             <span class="badge bg-lime">Profile Updated</span>
+                        @elseif(1==$student->is_updated)
+                            <span class="badge bg-yellow">Award Letter Pending</span>
                         @else
-                            <span class="badge bg-yellow">Profile Not Updated</span>
+                            <span class="badge bg-red">Profile Not Updated</span>
+                        @endif &nbsp; - &nbsp;
+                        @if($student->is_verified)
+                            <span class="badge bg-primary">Verified</span>
+                        @else
+                            <span class="badge bg-danger">Not Verified</span>
                         @endif
                     </h2>
                 </div>
@@ -59,7 +67,7 @@
                           enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
-                            <div class="row row-cards">
+                            {{--<div class="row row-cards">
                                 <div class="col-md-3">
                                     <div class="form-label">Change Update Status</div>
                                     <div>
@@ -75,282 +83,39 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label">Institute</label>
-                                    <select class="form-control form-select" name="institute_id">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\Institute::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->institute_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-label">Recipient Name</label>
-                                    <input type="text" class="form-control" name="recipient_name"
-                                           value="{{ $student->recipient_name }}">
-                                </div>
                             </div>
-                            <hr>
+                            <hr>--}}
                             <div class="row row-cards">
-                                <div class="col-md-2">
-                                    <label class="form-label">Academic Discipline</label>
-                                    <select class="form-control form-select" name="department_id">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\Department::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->department_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Academic Session</label>
-                                    <select class="form-control form-select" name="academic_session_id">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\AcademicSession::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->academic_session_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Primary Mobile</label>
-                                    <input type="text" class="form-control" name="primary_mobile"
-                                           value="{{ $student->primary_mobile }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Secondary Mobile</label>
-                                    <input type="text" class="form-control" name="secondary_mobile"
-                                           value="{{ $student->secondary_mobile }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Disability</label>
-                                    <select class="form-control form-select" name="recipients_disability_id">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\Disability::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->recipients_disability_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Blood Group</label>
-                                    <select class="form-control form-select" name="blood_group">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Enums\BloodGroup::cases() as $item)
-                                            <option value="{{ $item->value }}"
-                                                    @if($item->value == $student->blood_group?->value) selected @endif>{{ $item->value }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Date of birth<span
+                                <div class="col-md-3">
+                                    <label class="form-label">Name<span
                                             class="text-danger">*</span></label>
-                                    <div class="row g-2">
-                                        <div class="col-4">
-                                            <select name="dob[day]" class="form-select bg-danger text-white">
-                                                <option value="">Day</option>
-                                                @foreach(range(1,31) as $item)
-                                                    <option value="{{ $item }}"
-                                                            @if($student->dob && count(explode('-',$student->dob))==3 && explode('-',$student->dob)[2] == $item) selected @endif>{{ $item }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-4">
-                                            <select name="dob[month]"
-                                                    class="form-select bg-danger text-white">
-                                                <option value="">Month</option>
-                                                @foreach(['January','February','March','April','May','June','July','August','September','October','November','December'] as $item)
-                                                    <option value="{{ $loop->iteration }}"
-                                                            @if($student->dob && count(explode('-',$student->dob))==3 && explode('-',$student->dob)[1] == $loop->iteration) selected @endif>{{ $item }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-4">
-                                            <select name="dob[year]"
-                                                    class="form-select bg-danger text-white">
-                                                <option value="">Year</option>
-                                                @foreach(range(1980,now()->year) as $item)
-                                                    <option value="{{ $item }}"
-                                                            @if($student->dob && count(explode('-',$student->dob))==3 && explode('-',$student->dob)[0] == $item) selected @endif>{{ $item }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <input type="text" class="form-control" name="name"
+                                           value="{{ $student->user?->name }}">
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Email</label>
+                                <div class="col-md-3">
+                                    <label class="form-label">Email<span
+                                            class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="email"
-                                           value="{{ $student->user->email }}">
+                                           value="{{ $student->user?->email }}">
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">NID</label>
-                                    <input type="text" class="form-control" name="nid_number"
-                                           value="{{ $student->nid_number }}">
+                                <div class="col-md-3">
+                                    <label class="form-label">Mobile<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="primary_mobile"
+                                           value="{{ $student->user?->mobile }}">
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">District</label>
-                                    <select class="form-control district form-select" name="district_id" id="">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\District::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->district_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Upazila</label>
-                                    <select class="form-control upazila form-select" name="upazila_id" id="">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\Upazila::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->upazila_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Union</label>
-                                    <select class="form-control union form-select" name="union_id" id="">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\Union::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->union_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">HSC Result</label>
-                                    <input type="text" class="form-control" name="hsc_result"
-                                           value="{{ $student->hsc_result }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">SSC Result</label>
-                                    <input type="text" class="form-control" name="ssc_result"
-                                           value="{{ $student->ssc_result }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Permanent Address</label>
-                                    <textarea name="permanent_address" rows="2"
-                                              class="form-control">{{ $student->permanent_address }}</textarea>
+                                <div class="col-md-3">
+                                    <label class="form-label">Alternate Mobile<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="alternate_mobile"
+                                           value="{{ $student->user?->alternate_mobile }}">
                                 </div>
                             </div>
                             <hr>
                             <div class="row row-cards">
-                                <div class="col-md-2">
-                                    <label class="form-label">Father Name</label>
-                                    <input type="text" class="form-control" name="father_name"
-                                           value="{{ $student->father_name }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Father Living Status</label>
-                                    <select class="form-control form-select" name="father_living_status">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Enums\LivingStatus::cases() as $item)
-                                            <option value="{{ $item->value }}"
-                                                    @if($item->value == $student->father_living_status?->value) selected @endif>{{ $item->value }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Father Age</label>
-                                    <input type="number" class="form-control" name="father_age"
-                                           value="{{ old('father_age') }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Father Occupation</label>
-                                    <select class="form-control form-select" name="father_occupation_id">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\Occupation::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->father_occupation_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Father Disability</label>
-                                    <select class="form-control form-select" name="father_disability_id">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\Disability::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->father_disability_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Father Mobile</label>
-                                    <input type="text" class="form-control" name="father_mobile"
-                                           value="{{ $student->father_mobile }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Mother Name</label>
-                                    <input type="text" class="form-control" name="mother_name"
-                                           value="{{ $student->mother_name }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Mother Living Status</label>
-                                    <select class="form-control form-select" name="mother_living_status">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Enums\LivingStatus::cases() as $item)
-                                            <option value="{{ $item->value }}"
-                                                    @if($item->value == $student->mother_living_status?->value) selected @endif>{{ $item->value }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Mother Age</label>
-                                    <input type="number" class="form-control" name="mother_age"
-                                           value="{{ old('mother_age') }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Mother Occupation</label>
-                                    <select class="form-control form-select" name="mother_occupation_id">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\Occupation::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->mother_occupation_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Mother Disability</label>
-                                    <select class="form-control form-select" name="mother_disability_id">
-                                        <option value="">Select One</option>
-                                        @foreach(\App\Models\Admin\Settings\Disability::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if($item->id == $student->mother_disability_id) selected @endif>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Mother Mobile</label>
-                                    <input type="text" class="form-control" name="mother_mobile"
-                                           value="{{ $student->mother_mobile }}">
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row row-cards">
-                                <div class="col-md-2">
-                                    <label class="form-label">Other Guardian Mobile</label>
-                                    <input type="text" class="form-control" name="other_guardian_mobile"
-                                           value="{{ $student->other_guardian_mobile }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Number Of Family Member</label>
-                                    <input type="text" class="form-control" name="number_of_family_member"
-                                           value="{{ $student->number_of_family_member }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Bank Account Number</label>
-                                    <input type="text" class="form-control" name="bank_account_number"
-                                           value="{{ $student->bank_account_number }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Bank Account Title</label>
-                                    <input type="text" class="form-control" name="bank_account_title"
-                                           value="{{ $student->bank_account_title }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Bank</label>
+                                <div class="col-md-3">
+                                    <label class="form-label">Bank<span
+                                            class="text-danger">*</span></label>
                                     <select class="form-control form-select" name="bank_id">
                                         <option value="">Select One</option>
                                         @foreach(\App\Models\Admin\Settings\Bank::all() as $item)
@@ -359,70 +124,100 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Bank Account Branch</label>
+                                <div class="col-md-3">
+                                    <label class="form-label">Bank Account Branch<span
+                                            class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="bank_branch"
                                            value="{{ $student->bank_branch }}">
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Profile Picture</label>
-                                    <input type="file" class="form-control" name="profile_picture"
-                                           accept=".jpg,.png">
+                                <div class="col-md-3">
+                                    <label class="form-label">Bank Account Title<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="bank_account_title"
+                                           value="{{ $student->bank_account_title }}">
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">NID</label>
-                                    <input type="file" class="form-control" name="nid_document"
-                                           accept=".jpg,.png,application/pdf">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Bank Statement</label>
-                                    <input type="file" class="form-control" name="bank_statement"
-                                           accept=".jpg,.png,application/pdf">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Remarks</label>
-                                    <textarea name="remarks" rows="2"
-                                              class="form-control">{{ $student->remarks }}</textarea>
+                                <div class="col-md-3">
+                                    <label class="form-label">Bank Account Number<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="bank_account_number"
+                                           value="{{ $student->bank_account_number }}">
                                 </div>
                             </div>
                             <hr>
                             <div class="row row-cards">
-                                <div class="col-md-2">
-                                    <label class="form-label">CGPA</label>
-                                    <input type="number" class="form-control" name="cgpa" step="0.01"
-                                           value="{{ $student->cgpa }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Running Year</label>
-                                    <input type="text" class="form-control" name="running_year"
-                                           value="{{ $student->running_year }}">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Result Document</label>
-                                    <input type="file" class="form-control" name="result_document"
-                                           accept=".jpg,.png,application/pdf">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Result Remarks</label>
-                                    <textarea name="result_remarks" rows="2"
-                                              class="form-control">{{ $student->result_remarks }}</textarea>
-                                </div>
+                                <label class="form-label">Remarks</label>
+                                <textarea name="remarks" rows="2"
+                                          class="form-control">{{ $student->remarks }}</textarea>
                             </div>
                             <hr>
                             <div class="row row-cards">
-                                <div class="col-md-2">
-                                    <label class="form-label">New Password</label>
-                                    <input type="password" class="form-control" name="password">
+                                <div class="col-md-4">
+                                    @if($student->bank_statement)
+                                        <a id="bs"
+                                           href="{{ asset('storage/'.$student->app_id.'/'.$student->bank_statement) }}"
+                                           class="btn btn-primary">Bank Statement (PDF)</a>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                   name="delete_bank_statement">
+                                            <span class="form-check-label text-danger">Delete Bank Statement</span>
+                                        </label>
+                                    @else
+                                        <label class="form-label">Bank Statement (PDF, Maximum: 300kb)<span
+                                                class="text-danger">*</span></label>
+                                        <input type="file" class="form-control" name="bank_statement"
+                                               accept="application/pdf">
+                                    @endif
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">New Confirmed Password</label>
-                                    <input type="password" class="form-control" name="password_confirmation">
+                                <div class="col-md-4">
+                                    @if($student->studentship_certificate)
+                                        <a id="sc"
+                                           href="{{ asset('storage/'.$student->app_id.'/'.$student->studentship_certificate) }}"
+                                           class="btn btn-primary">Studentship Certificate (PDF)</a>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                   name="delete_studentship_certificate">
+                                            <span
+                                                class="form-check-label text-danger">Delete Studentship Certificate</span>
+                                        </label>
+                                    @else
+                                        <label class="form-label">Studentship Certificate (PDF, Maximum: 300kb)<span
+                                                class="text-danger">*</span></label>
+                                        <input type="file" class="form-control" name="studentship_certificate"
+                                               accept="application/pdf">
+                                    @endif
+                                </div>
+                                <div class="col-md-4">
+                                    @if($student->award_letter)
+                                        <a id="al"
+                                           href="{{ asset('storage/'.$student->app_id.'/'.$student->award_letter) }}"
+                                           class="btn btn-primary">Award Letter (PDF)</a>
+                                        <label class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="delete_award_letter">
+                                            <span class="form-check-label text-danger">Delete Award Letter</span>
+                                        </label>
+                                    @else
+                                        <label class="form-label">Award Letter (PDF, Maximum: 300kb)<span
+                                                class="text-danger">*</span></label>
+                                        <input type="file" class="form-control" name="award_letter"
+                                               accept="application/pdf">
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary ms-auto">Update Profile
-                            </button>
+                            <label class="form-check">
+                                <input class="form-check-input" type="checkbox" name="update_personal_info">
+                                <span class="form-check-label text-info">Update Personal Info</span>
+                            </label>
+                            <label class="form-check">
+                                <input class="form-check-input" type="checkbox" name="update_bank_info">
+                                <span class="form-check-label text-info">Update Bank Info</span>
+                            </label>
+                            <label class="form-check">
+                                <input class="form-check-input" type="checkbox" name="update_files">
+                                <span class="form-check-label text-info">Update Files</span>
+                            </label>
+                            <button type="submit" class="btn btn-primary ms-auto mt-2">Update</button>
                         </div>
                     </form>
                 </div>
@@ -449,69 +244,17 @@
                 .end();
         }
 
-        //Get Upazila,Union Data
-        $(document).on('change', '.district', function () {
-            $(".upazila").empty().append(new Option('Select Option'));
-            var districtId = $("select[name='district_id']").val();
-            $.ajax({
-                url: '{{route('get_upazila')}}',
-                type: 'POST',
-                data: {'district_id': districtId},
-                dataType: "json",
-                beforeSend: function (request) {
-                    return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']")
-                        .attr('content'));
-                },
-                success: function (data) {
-                    $.each(data, function (key, value) {
-                        $(".upazila").append('<option value="' + value
-                            .id + '">' + value.name + '</option>');
-                    });
-                },
-                error: function (data) {
-                    let msg = '';
-                    if (data.responseJSON.errors) {
-                        $.each(data.responseJSON.errors, function (i, error) {
-                            msg += '<p>' + error[0] + '</p>';
-                        });
-                    } else {
-                        msg = data.responseJSON.message;
-                    }
-                    toastr.error(msg);
-                }
-            });
+        document.getElementById("sc").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent the default behavior of opening in a new tab.
+            window.open(this.href, "_blank", "width=600,height=400"); // Open in a new external window.
         });
-        $(document).on('change', '.upazila', function () {
-            $(".union").empty().append(new Option('Select Option'));
-            var upazilaId = $("select[name='upazila_id']").val();
-            $.ajax({
-                url: '{{route('get_union')}}',
-                type: 'POST',
-                data: {'upazila_id': upazilaId},
-                dataType: "json",
-                beforeSend: function (request) {
-                    return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']")
-                        .attr('content'));
-                },
-                success: function (data) {
-                    $.each(data, function (key, value) {
-                        $(".union").append('<option value="' + value
-                            .id + '">' + value.name + '</option>');
-                    });
-                },
-                error: function (data) {
-                    let msg = '';
-                    if (data.responseJSON.errors) {
-                        $.each(data.responseJSON.errors, function (i, error) {
-                            msg += '<p>' + error[0] + '</p>';
-                        });
-                    } else {
-                        msg = data.responseJSON.message;
-                    }
-                    toastr.error(msg);
-                }
-            });
-
+        document.getElementById("bs").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent the default behavior of opening in a new tab.
+            window.open(this.href, "_blank", "width=600,height=400"); // Open in a new external window.
+        });
+        document.getElementById("al").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent the default behavior of opening in a new tab.
+            window.open(this.href, "_blank", "width=600,height=400"); // Open in a new external window.
         });
     </script>
 @endpush

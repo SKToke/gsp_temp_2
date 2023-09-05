@@ -10,14 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->morphs('resource');
-            $table->string('path');
-            $table->string('name')->unique();
-            $table->text('remarks')->nullable();
-            $table->timestamps();
-        });
+//        Schema::create('files', function (Blueprint $table) {
+//            $table->id();
+//            $table->morphs('resource');
+//            $table->string('path');
+//            $table->string('name')->unique();
+//            $table->text('remarks')->nullable();
+//            $table->timestamps();
+//        });
     }
 
     /**

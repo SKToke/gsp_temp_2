@@ -11,7 +11,7 @@
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                    aria-label="Open user menu">
                     <span class="avatar avatar-sm"
-                          style="background-image: url('{{ asset('assets/static/avatars/000m.jpg') }}')"></span>
+                          style="background-image: url(https://eu.ui-avatars.com/api/?name={{ getUIAvatarName() }}&size=160)"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div>{{ auth()->user()->name }}</div>
                     </div>

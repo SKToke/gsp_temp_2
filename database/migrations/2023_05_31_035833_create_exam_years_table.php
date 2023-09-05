@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('exam_years', function (Blueprint $table) {
-            $table->id()->index();
-            $table->string('name')->unique();
-            $table->softDeletes();
-            $table->timestamps();
-        });
+//        Schema::create('exam_years', function (Blueprint $table) {
+//            $table->id()->index();
+//            $table->string('name')->unique();
+//            $table->softDeletes();
+//            $table->timestamps();
+//        });
     }
 
     /**

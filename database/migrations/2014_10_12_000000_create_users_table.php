@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('mobile')->unique()->nullable();
+            $table->string('alternate_mobile')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('role')->default(1);

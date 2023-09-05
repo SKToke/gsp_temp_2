@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('education_levels', function (Blueprint $table) {
-            $table->id()->index();
-            $table->string('name')->unique();
-            $table->softDeletes();
-            $table->timestamps();
-        });
+//        Schema::create('education_levels', function (Blueprint $table) {
+//            $table->id()->index();
+//            $table->string('name')->unique();
+//            $table->softDeletes();
+//            $table->timestamps();
+//        });
     }
 
     /**

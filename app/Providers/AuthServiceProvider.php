@@ -22,6 +22,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('admin', fn(User $user) => $user->id == 1);
+        Gate::define('admin', fn(User $user) => in_array($user->email, ['gsp_temp@gmail.com','almamun.ilias@czm-bd.org','rakibul@czm-bd.org']));
     }
 }

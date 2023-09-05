@@ -10,15 +10,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('unions', function (Blueprint $table) {
-            $table->id()->index();
-            $table->string('name');
-            $table->foreignIdFor(\App\Models\Admin\Settings\Upazila::class)->index();
-            $table->softDeletes();
-            $table->timestamps();
-
-            $table->unique(['name', 'upazila_id']);
-        });
+//        Schema::create('unions', function (Blueprint $table) {
+//            $table->id()->index();
+//            $table->string('name');
+//            $table->foreignIdFor(\App\Models\Admin\Settings\Upazila::class)->index();
+//            $table->softDeletes();
+//            $table->timestamps();
+//
+//            $table->unique(['name', 'upazila_id']);
+//        });
     }
 
     /**

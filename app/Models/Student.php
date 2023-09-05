@@ -27,7 +27,8 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 class Student extends Model
 {
     protected $casts = [
-        'is_updated' => 'bool',
+        'is_updated' => 'int',
+        'is_verified' => 'int',
         'father_dob' => 'datetime:Y-m-d',
         'mother_dob' => 'datetime:Y-m-d',
         'status' => StudentStatus::class,
@@ -42,8 +43,6 @@ class Student extends Model
         'password' => 'hashed',
     ];
 
-
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -56,7 +55,7 @@ class Student extends Model
 
     public function pictureResource(): MorphOne
     {
-        return $this->morphOne(File::class, 'resource')->whereRemarks('picture');
+        return $this->morphOne(File::class, 'resource')->whereRemarks('studentship_certificate');
     }
 
     public function nidResource(): MorphOne

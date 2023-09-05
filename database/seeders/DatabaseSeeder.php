@@ -37,23 +37,39 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'gsp_temp@gmail.com',
             'mobile' => 01700000000,
-            'password' => 'gsp_temp@gmail.com',
+            'password' => '1gsp_temp@gmail.com',
+            'role' => User::ADMIN,
+            'status' => CommonStatus::Active
+        ]);
+        User::create([
+            'name' => 'Al-Mamun Ilias',
+            'email' => 'almamun.ilias@czm-bd.org',
+            'mobile' => 01700000001,
+            'password' => '582almamun.ilias@czm-bd.org',
+            'role' => User::ADMIN,
+            'status' => CommonStatus::Active
+        ]);
+        User::create([
+            'name' => 'Rakibul Islam',
+            'email' => 'rakibul@czm-bd.org',
+            'mobile' => 01700000002,
+            'password' => 'rakibul@czm-bd.org789',
             'role' => User::ADMIN,
             'status' => CommonStatus::Active
         ]);
         $this->call([
-            AcademicSessionSeeder::class,
-            BatchSeeder::class,
-            ZoneSeeder::class,
-            SponsorSeeder::class,
+//            AcademicSessionSeeder::class,
+//            BatchSeeder::class,
+//            ZoneSeeder::class,
+//            SponsorSeeder::class,
             BankSeeder::class,
-            DepartmentSeeder::class,
-            DisabilitySeeder::class,
-            DistrictSeeder::class,
-            InstituteSeeder::class,
-            OccupationSeeder::class,
-            UpazilaSeeder::class,
-            UnionSeeder::class,
+//            DepartmentSeeder::class,
+//            DisabilitySeeder::class,
+//            DistrictSeeder::class,
+//            InstituteSeeder::class,
+//            OccupationSeeder::class,
+//            UpazilaSeeder::class,
+//            UnionSeeder::class,
         ]);
     }
 }
