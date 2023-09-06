@@ -22,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('admin', fn(User $user) => in_array($user->email, ['gsp_temp@gmail.com','almamun.ilias@czm-bd.org','rakibul@czm-bd.org']));
+        Gate::define('super-admin', fn(User $user) => in_array($user->email, ['gsp_temp_2@gmail.com']));
+        Gate::define('admin', fn(User $user) => in_array($user->email, ['gsp_temp_2@gmail.com', 'almamun.ilias@czm-bd.org', 'rakibul@czm-bd.org']));
     }
 }

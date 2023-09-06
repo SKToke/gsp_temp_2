@@ -5,18 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\CommonStatus;
 use App\Models\User;
-use Database\Seeders\Admin\Settings\AcademicSessionSeeder;
 use Database\Seeders\Admin\Settings\BankSeeder;
-use Database\Seeders\Admin\Settings\BatchSeeder;
-use Database\Seeders\Admin\Settings\DepartmentSeeder;
-use Database\Seeders\Admin\Settings\DisabilitySeeder;
-use Database\Seeders\Admin\Settings\DistrictSeeder;
-use Database\Seeders\Admin\Settings\InstituteSeeder;
-use Database\Seeders\Admin\Settings\OccupationSeeder;
-use Database\Seeders\Admin\Settings\SponsorSeeder;
-use Database\Seeders\Admin\Settings\UnionSeeder;
-use Database\Seeders\Admin\Settings\UpazilaSeeder;
-use Database\Seeders\Admin\Settings\ZoneSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -34,10 +23,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
-            'name' => 'admin',
-            'email' => 'gsp_temp@gmail.com',
+            'name' => 'Admin',
+            'email' => 'gsp_temp_2@gmail.com',
             'mobile' => 01700000000,
-            'password' => '1gsp_temp@gmail.com',
+            'password' => '1gsp_temp_2@gmail.com',
             'role' => User::ADMIN,
             'status' => CommonStatus::Active
         ]);
