@@ -40,6 +40,14 @@
             <div class="col-lg">
                 <div class="container-tight">
                     <div class="text-center mb-4">
+                        <div class="text-danger" style="font-weight: bold; font-size: large">If you did not get SMS
+                            call: 01708523423
+                        </div>
+                        <div class="text-danger" style="font-weight: bold; font-size: large">If you did not get SMS
+                            call: 01783558822
+                        </div>
+                    </div>
+                    <div class="text-center mb-4">
                         <a href="." class="navbar-brand navbar-brand-autodark"><img
                                 src="{{ asset('assets/static/logo.svg') }}" height="36"
                                 alt=""></a>
