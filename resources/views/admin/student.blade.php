@@ -39,8 +39,11 @@
                                 <label for="inputState10" class="czm-xs">Updated</label>
                                 <select id="inputState10" class="form-control form-select" name="is_updated">
                                     <option value="" @if('' == request('is_updated')) selected @endif>All</option>
-                                    <option value="1" @if(1 == request('is_updated')) selected @endif>Yes without award</option>
-                                    <option value="2" @if(2 == request('is_updated')) selected @endif>Yes with award</option>
+                                    <option value="1" @if(1 == request('is_updated')) selected @endif>Yes without
+                                        award
+                                    </option>
+                                    <option value="2" @if(2 == request('is_updated')) selected @endif>Yes with award
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-md-2">
@@ -77,16 +80,21 @@
                                     @elseif(1==$student->is_updated) style="background-color: #f2d8c5"
                                     @endif
                                 >
-                                    <td class="sort-name" @if($student->is_verified) style="background-color: #0080ff" @endif>
+                                    <td class="sort-name"
+                                        @if($student->is_verified) style="background-color: #0080ff" @endif>
                                         {{ $student->id }}
                                     </td>
-                                    <td class="sort-city">{{ $student->app_id }}</td>
+                                    <td class="sort-name"
+                                        @if($student->admin_updated_at) style="background-color: #00ffff" @endif>
+                                        {{ $student->app_id }}
+                                    </td>
                                     <td class="sort-city">{{ $student->gsp_id }}</td>
                                     <td class="sort-city">{{ $student->user?->name }}</td>
                                     <td class="sort-city">{{ $student->user?->email }}</td>
                                     <td class="sort-city">{{ $student->user?->mobile }}</td>
                                     <td class="sort-city">
-                                        <a id="externalLink" href="{{ asset('storage/'.$student->app_id.'/'.$student->bank_statement) }}">{{ $student->bank_account_number }}</a>
+                                        <a id="externalLink"
+                                           href="{{ asset('storage/'.$student->app_id.'/'.$student->bank_statement) }}">{{ $student->bank_account_number }}</a>
                                     </td>
                                     <td class="sort-city">
                                         <a href="{{ route('students.view_single',$student->id) }}"
@@ -123,7 +131,7 @@
 @endsection
 @push("footer")
     <script>
-        document.getElementById("externalLink").addEventListener("click", function(event) {
+        document.getElementById("externalLink").addEventListener("click", function (event) {
             event.preventDefault(); // Prevent the default behavior of opening in a new tab.
             window.open(this.href, "_blank", "width=600,height=400"); // Open in a new external window.
         });

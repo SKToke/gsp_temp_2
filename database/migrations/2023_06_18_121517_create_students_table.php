@@ -1,15 +1,6 @@
 <?php
 
-use App\Models\Admin\Settings\AcademicSession;
 use App\Models\Admin\Settings\Bank;
-use App\Models\Admin\Settings\Batch;
-use App\Models\Admin\Settings\Department;
-use App\Models\Admin\Settings\District;
-use App\Models\Admin\Settings\Institute;
-use App\Models\Admin\Settings\Sponsor;
-use App\Models\Admin\Settings\Union;
-use App\Models\Admin\Settings\Upazila;
-use App\Models\Admin\Settings\Zone;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -39,6 +30,7 @@ return new class extends Migration {
             $table->string('award_letter')->nullable();
             $table->tinyInteger('is_updated')->default(0);
             $table->tinyInteger('is_verified')->default(0);
+            $table->timestamp('admin_updated_at')->nullable();
             $table->timestamps();
         });
     }

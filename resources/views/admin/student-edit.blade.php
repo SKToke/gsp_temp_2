@@ -86,6 +86,7 @@
                             </div>
                             <hr>--}}
                             <div class="row row-cards">
+                                <div class="text-primary">Personal Info</div>
                                 <div class="col-md-3">
                                     <label class="form-label">Name<span
                                             class="text-danger">*</span></label>
@@ -101,7 +102,7 @@
                                 <div class="col-md-3">
                                     <label class="form-label">Mobile<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="primary_mobile"
+                                    <input type="text" class="form-control" name="mobile"
                                            value="{{ $student->user?->mobile }}">
                                 </div>
                                 <div class="col-md-3">
@@ -113,6 +114,7 @@
                             </div>
                             <hr>
                             <div class="row row-cards">
+                                <div class="text-primary">Bank Info</div>
                                 <div class="col-md-3">
                                     <label class="form-label">Bank<span
                                             class="text-danger">*</span></label>
@@ -142,21 +144,21 @@
                                     <input type="text" class="form-control" name="bank_account_number"
                                            value="{{ $student->bank_account_number }}">
                                 </div>
+                                <div class="col-md-12">
+                                    <label class="form-label">Remarks</label>
+                                    <textarea name="remarks" rows="2"
+                                              class="form-control">{{ $student->remarks }}</textarea>
+                                </div>
                             </div>
                             <hr>
                             <div class="row row-cards">
-                                <label class="form-label">Remarks</label>
-                                <textarea name="remarks" rows="2"
-                                          class="form-control">{{ $student->remarks }}</textarea>
-                            </div>
-                            <hr>
-                            <div class="row row-cards">
+                                <div class="text-primary">Files</div>
                                 <div class="col-md-4">
                                     @if($student->bank_statement)
                                         <a id="bs"
                                            href="{{ asset('storage/'.$student->app_id.'/'.$student->bank_statement) }}"
                                            class="btn btn-primary">Bank Statement (PDF)</a>
-                                        <label class="form-check">
+                                        <label class="form-check mt-2">
                                             <input class="form-check-input" type="checkbox"
                                                    name="delete_bank_statement">
                                             <span class="form-check-label text-danger">Delete Bank Statement</span>
@@ -173,7 +175,7 @@
                                         <a id="sc"
                                            href="{{ asset('storage/'.$student->app_id.'/'.$student->studentship_certificate) }}"
                                            class="btn btn-primary">Studentship Certificate (PDF)</a>
-                                        <label class="form-check">
+                                        <label class="form-check mt-2">
                                             <input class="form-check-input" type="checkbox"
                                                    name="delete_studentship_certificate">
                                             <span
@@ -191,8 +193,9 @@
                                         <a id="al"
                                            href="{{ asset('storage/'.$student->app_id.'/'.$student->award_letter) }}"
                                            class="btn btn-primary">Award Letter (PDF)</a>
-                                        <label class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="delete_award_letter">
+                                        <label class="form-check mt-2">
+                                            <input class="form-check-input" type="checkbox"
+                                                   name="delete_award_letter">
                                             <span class="form-check-label text-danger">Delete Award Letter</span>
                                         </label>
                                     @else

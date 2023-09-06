@@ -123,7 +123,7 @@
                 @if(2==$student->is_updated)
                     @include('student.updated-profile')
                 @else
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-danger" role="alert">
                         <h4 class="alert-heading">নির্দেশনাঃ </h4>
                         <p>
                             ১। লগইন করার পর প্রথমে দেখেনিন তথ্যগুলো আপনার কি না! যদি আপনার না হয় তবে দ্রুত আমাদেরকে
@@ -153,7 +153,6 @@
                             নম্বর
                             উল্ল্যেখ করে ইমেইল করুন "genius@czm-bd.org" অথবা জিনিয়াস এর মোবাইল নম্বর সমূহে যোগাযোগ করুন।
                         </p>
-
                     </div>
 
                     <div class="alert" role="alert">
@@ -161,8 +160,10 @@
                             <div class="col-md-3">Name: <b class="text-info">{{ auth()->user()->name }};</b></div>
                             <div class="col-md-3">App ID: <b class="text-info">{{ $student->app_id }};</b></div>
                             <div class="col-md-2">GSP ID: <b class="text-info">{{ $student->gsp_id }};</b></div>
-                            <div class="col-md-2">Cell 1(SMS): <b class="text-info">{{ $student->user?->mobile }};</b></div>
-                            <div class="col-md-2">Cell 2: <b class="text-info">{{ $student->user?->alternate_mobile }};</b></div>
+                            <div class="col-md-2">Cell 1(SMS): <b class="text-info">{{ $student->user?->mobile }};</b>
+                            </div>
+                            <div class="col-md-2">Cell 2: <b class="text-info">{{ $student->user?->alternate_mobile }}
+                                    ;</b></div>
                             <div class="col-md-4">Department: <b class="text-info">{{ $student->department }};</b></div>
                             <div class="col-md-4">University: <b class="text-info">{{ $student->university }};</b></div>
                         </div>
@@ -178,78 +179,83 @@
                                         <div class="col-md-2">
                                             <label class="form-label">Select Your Bank<span
                                                     class="text-danger">*</span></label>
-                                            <p>hello</p>
-                                            <select class="form-control form-select" name="bank_id" required @if(null!=$student->bank_id) disabled @endif">
-                                                <option value="">Select One</option>
-                                                @foreach(\App\Models\Admin\Settings\Bank::all() as $item)
-                                                    <option value="{{ $item->id }}"
-                                                            @if($item->id == $student->bank_id) selected @endif>{{ $item->name }}</option>
+                                            <select class="form-control form-select" name="bank_id" required
+                                                    @if(null!=$student->bank_id) disabled @endif">
+                                            <option value="">Select One</option>
+                                            @foreach(\App\Models\Admin\Settings\Bank::all() as $item)
+                                                <option value="{{ $item->id }}"
+                                                        @if($item->id == $student->bank_id) selected @endif>{{ $item->name }}</option>
                                                 @endforeach
-                                            </select>
+                                                </select>
                                         </div>
                                         <div class="col-md-2">
                                             <label class="form-label">Bank Account Number<span
                                                     class="text-danger">*</span></label>
-                                            <p>hello</p>
-                                            <input type="text" class="form-control" name="bank_account_number" @if(null!=$student->bank_account_number) disabled @endif value="{{ $student->bank_account_number ?? old('bank_account_number') }}" required>
+                                            <input type="text" class="form-control" name="bank_account_number"
+                                                   @if(null!=$student->bank_account_number) disabled
+                                                   @endif value="{{ $student->bank_account_number ?? old('bank_account_number') }}"
+                                                   required>
                                         </div>
                                         <div class="col-md-2">
                                             <label class="form-label">Bank Account Title<span
                                                     class="text-danger">*</span></label>
-                                            <p>hello</p>
-                                            <input type="text" class="form-control" name="bank_account_title" @if(null!=$student->bank_account_title) disabled @endif value="{{ $student->bank_account_title ?? old('bank_account_title') }}" required>
+                                            <input type="text" class="form-control" name="bank_account_title"
+                                                   @if(null!=$student->bank_account_title) disabled
+                                                   @endif value="{{ $student->bank_account_title ?? old('bank_account_title') }}"
+                                                   required>
                                         </div>
 
                                         <div class="col-md-2">
                                             <label class="form-label">Bank Account Branch<span
                                                     class="text-danger">*</span></label>
-                                            <p>hello</p>
-                                            <input type="text" class="form-control" name="bank_branch" @if(null!=$student->bank_branch) disabled @endif value="{{ $student->bank_branch ?? old('bank_branch') }}" required>
+                                            <input type="text" class="form-control" name="bank_branch"
+                                                   @if(null!=$student->bank_branch) disabled
+                                                   @endif value="{{ $student->bank_branch ?? old('bank_branch') }}"
+                                                   required>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row row-cards">
                                         <div class="col-md-3">
                                             @if(null==$student->bank_statement)
-                                            <label class="form-label">Bank Statement (PDF, Maximum: 300kb)<span
-                                                    class="text-danger">*</span></label>
-                                            <p>hello</p>
-                                            <input type="file" class="form-control" name="bank_statement"
-                                                   accept="application/pdf" required>
+                                                <label class="form-label">Bank Statement (PDF, Maximum: 300kb)<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="bank_statement"
+                                                       accept="application/pdf" required>
                                             @else
-                                                <a href="{{ asset('storage/'.$student->app_id.'/'.$student->bank_statement) }}" class="btn btn-primary"
+                                                <a href="{{ asset('storage/'.$student->app_id.'/'.$student->bank_statement) }}"
+                                                   class="btn btn-primary"
                                                    download>Download Bank Statement (PDF)</a>
                                             @endif
                                         </div>
                                         <div class="col-md-3">
                                             @if(null==$student->studentship_certificate)
-                                            <label class="form-label">Studentship Certificate (PDF, Maximum: 300kb)<span
-                                                    class="text-danger">*</span></label>
-                                            <p>hello</p>
-                                            <input type="file" class="form-control" name="studentship_certificate"
-                                                   accept="application/pdf" required>
+                                                <label class="form-label">Studentship Certificate (PDF, Maximum:
+                                                    300kb)<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="studentship_certificate"
+                                                       accept="application/pdf" required>
                                             @else
-                                                <a href="{{ asset('storage/'.$student->app_id.'/'.$student->studentship_certificate) }}" class="btn btn-primary"
+                                                <a href="{{ asset('storage/'.$student->app_id.'/'.$student->studentship_certificate) }}"
+                                                   class="btn btn-primary"
                                                    download>Download Studentship Certificate (PDF)</a>
                                             @endif
                                         </div>
                                         <div class="col-md-3">
                                             @if(null==$student->award_letter)
-                                            <label class="form-label">Award Letter (PDF, Maximum: 300kb)</label>
-                                            <p>hello</p>
-                                            <input type="file" class="form-control" name="award_letter" accept="application/pdf">
+                                                <label class="form-label">Award Letter (PDF, Maximum: 300kb)</label>
+                                                <input type="file" class="form-control" name="award_letter"
+                                                       accept="application/pdf">
                                             @else
-                                                <a href="{{ asset('storage/'.$student->app_id.'/'.$student->award_letter) }}" class="btn btn-primary"
+                                                <a href="{{ asset('storage/'.$student->app_id.'/'.$student->award_letter) }}"
+                                                   class="btn btn-primary"
                                                    download>Download Award Letter (PDF)</a>
                                             @endif
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row row-cards">
                                         <div class="col-md-6">
                                             <label class="form-label">Remarks</label>
-                                            <p>hello</p>
-                                            <textarea name="remarks" class="form-control">{{ $student->remarks ?? old('remarks') }}</textarea>
+                                            <textarea name="remarks"
+                                                      class="form-control">{{ $student->remarks ?? old('remarks') }}</textarea>
                                         </div>
                                     </div>
                                 </div>

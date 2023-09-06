@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\CommonStatus;
-use App\Enums\StudentStatus;
 use App\Http\Controllers\Controller;
 use App\Imports\DataImport;
 use App\Models\Admin\Settings\AcademicSession;
@@ -83,6 +82,20 @@ class DataImportController extends Controller
         return back()->with(['status' => "Total $totalCount family has been successfully imported. Found->$totalFound, New->$totalNew"]);
     }
 
+    private function byRef($user, $row)
+    {
+        Student::create([
+            'user_id' => $user->id,
+            'app_id' => $row['app_id'],
+            'gsp_id' => $row['gsp_id'],
+            'zone' => $row['zone'],
+            'university' => $row['university'],
+            'department' => $row['department'],
+            'created_at' => now(),
+            'updated_at' => null
+        ]);
+    }
+
     private function byRaw($user, $row)
     {
         $zone = Zone::where('name', 'like', '%' . $row['zone'] . '%')->first();
@@ -151,18 +164,6 @@ class DataImportController extends Controller
             'primary_marks' => $row['primary_marks'] ?? null,
             'viva_marks' => $row['viva_marks'] ?? null,
             'remarks' => $row['remarks'] ?? null,
-        ]);
-    }
-
-    private function byRef($user, $row)
-    {
-        Student::create([
-            'user_id' => $user->id,
-            'app_id' => $row['app_id'],
-            'gsp_id' => $row['gsp_id'],
-            'zone' => $row['zone'],
-            'university' => $row['university'],
-            'department' => $row['department'],
         ]);
     }
 }

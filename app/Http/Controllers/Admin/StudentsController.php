@@ -107,7 +107,6 @@ class StudentsController extends Controller
 
     public function update(Student $student, Request $request)
     {
-//        dd($student->user?->name, $request->all());
         $update_rules = [
             //Update
             'update_personal_info' => ['nullable', 'in:on,off'],
@@ -215,6 +214,8 @@ class StudentsController extends Controller
                     $student->award_letter = $fileName;
                 }
             }
+            $student->admin_updated_at = now();
+            $student->updated_at = now();
             $student->save();
             $message = 'Data has been successfully updated.';
         }
