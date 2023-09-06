@@ -21,8 +21,8 @@
             </a>
         </li>
         @if(true)
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('exim.view') }}">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('exim.view') }}">
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-database-import"
                          width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -35,14 +35,34 @@
                        <path d="M22 19l-3 -3l-3 3"></path>
                     </svg>
                   </span>
-                <span class="nav-link-title">
+                    <span class="nav-link-title">
                     Import
                   </span>
-            </a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
-               data-bs-auto-close="false" role="button" aria-expanded="false">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('exim.export') }}">
+                  <span class="nav-link-icon d-md-none d-lg-inline-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-database-export"
+                           width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                           stroke-linecap="round" stroke-linejoin="round">
+                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                           <path d="M4 6c0 1.657 3.582 3 8 3s8 -1.343 8 -3s-3.582 -3 -8 -3s-8 1.343 -8 3"></path>
+                           <path d="M4 6v6c0 1.657 3.582 3 8 3c1.118 0 2.183 -.086 3.15 -.241"></path>
+                           <path d="M20 12v-6"></path>
+                           <path d="M4 12v6c0 1.657 3.582 3 8 3c.157 0 .312 -.002 .466 -.005"></path>
+                           <path d="M16 19h6"></path>
+                           <path d="M19 16l3 3l-3 3"></path>
+                        </svg>
+                  </span>
+                    <span class="nav-link-title">
+                    Export
+                  </span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
+                   data-bs-auto-close="false" role="button" aria-expanded="false">
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24"
                          height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -53,19 +73,19 @@
                        <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
                     </svg>
                   </span>
-                <span class="nav-link-title">
+                    <span class="nav-link-title">
                     Settings
                   </span>
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('sponsor.index') }}" rel="noopener">
-                    Sponsor
                 </a>
-            </div>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-green" href="#navbar-help" data-bs-toggle="dropdown"
-               data-bs-auto-close="false" role="button" aria-expanded="false">
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('sponsor.index') }}" rel="noopener">
+                        Sponsor
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-green" href="#navbar-help" data-bs-toggle="dropdown"
+                   data-bs-auto-close="false" role="button" aria-expanded="false">
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-tabler text-green"
                          width="24"
@@ -77,41 +97,41 @@
                        <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"></path>
                     </svg>
                   </span>
-                <span class="nav-link-title">
+                    <span class="nav-link-title">
                     Tabler
                   </span>
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="https://tabler.io/preview" target="_blank" rel="noopener">
-                    Preview
                 </a>
-                <a class="dropdown-item" href="https://tabler-icons.io/" target="_blank" rel="noopener">
-                    Icons
-                </a>
-                <a class="dropdown-item" href="https://tabler.io/docs" target="_blank" rel="noopener">
-                    Documentation
-                </a>
-                <a class="dropdown-item" href="./changelog.html">
-                    Changelog
-                </a>
-                <a class="dropdown-item" href="https://github.com/tabler/tabler" target="_blank"
-                   rel="noopener">
-                    Source code
-                </a>
-                <a class="dropdown-item text-pink" href="https://github.com/sponsors/codecalm"
-                   target="_blank" rel="noopener">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1" width="24"
-                         height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                         stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path
-                            d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/>
-                    </svg>
-                    Sponsor project!
-                </a>
-            </div>
-        </li>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="https://tabler.io/preview" target="_blank" rel="noopener">
+                        Preview
+                    </a>
+                    <a class="dropdown-item" href="https://tabler-icons.io/" target="_blank" rel="noopener">
+                        Icons
+                    </a>
+                    <a class="dropdown-item" href="https://tabler.io/docs" target="_blank" rel="noopener">
+                        Documentation
+                    </a>
+                    <a class="dropdown-item" href="./changelog.html">
+                        Changelog
+                    </a>
+                    <a class="dropdown-item" href="https://github.com/tabler/tabler" target="_blank"
+                       rel="noopener">
+                        Source code
+                    </a>
+                    <a class="dropdown-item text-pink" href="https://github.com/sponsors/codecalm"
+                       target="_blank" rel="noopener">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1" width="24"
+                             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path
+                                d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/>
+                        </svg>
+                        Sponsor project!
+                    </a>
+                </div>
+            </li>
         @endif
     </ul>
 </div>

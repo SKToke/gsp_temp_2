@@ -9,15 +9,15 @@
 
 use App\Http\Controllers\Admin\DataImportController;
 use App\Http\Controllers\Admin\StudentsController;
-use App\Http\Controllers\CommonController;
 
 
 Route::prefix('settings')->group(base_path('routes/Admin/settings.php'));
 
 //EXIM
 Route::prefix('exim')->controller(DataImportController::class)->group(function () {
-    Route::get('', 'index')->name('exim.view');
-    Route::post('', 'import')->name('exim.import');
+    Route::get('import', 'index')->name('exim.view');
+    Route::post('import', 'import')->name('exim.import');
+    Route::get('export', 'export')->name('exim.export');
 });
 
 //Students

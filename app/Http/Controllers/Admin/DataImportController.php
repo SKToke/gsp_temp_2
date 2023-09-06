@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\CommonStatus;
+use App\Exports\StudentsExport;
 use App\Http\Controllers\Controller;
 use App\Imports\DataImport;
 use App\Models\Admin\Settings\AcademicSession;
@@ -21,13 +22,22 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataImportController extends Controller
 {
-
     public function index(): Renderable
     {
         return view('admin.exim');
+    }
+
+    public function export()
+    {
+        $students = Student::orderBy('id')->get();
+
+        $data['students'] = $students;
+        $file_name = "Students_" . now()->format('Ymd_Hi') . '.xlsx';
+        return Excel::download(new StudentsExport('admin.export-students', $data), $file_name, null, ['file_name' => $file_name]);
     }
 
     public function import()
