@@ -84,6 +84,7 @@
             <th>Bank Brunch</th>
             <th>Bank Account Title</th>
             <th>Bank Account Number</th>
+            <th>Updated</th>
             <th>Verified</th>
             <th>Remarks</th>
         </tr>
@@ -105,6 +106,15 @@
                 <td>{{ $item->bank_branch }}</td>
                 <td>{{ $item->bank_account_title }}</td>
                 <td>{{ $item->bank_account_number }}</td>
+                <td>
+                    @if(0==$item->is_updated)
+                        Not Updated
+                    @elseif(1==$item->is_updated)
+                        Award Letter Pending
+                    @else
+                        Complete Update
+                    @endif
+                </td>
                 <td>
                     @if($item->is_verified)
                         Yes
