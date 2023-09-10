@@ -67,9 +67,10 @@
                                 <th>App Id</th>
                                 <th>GSP Id</th>
                                 <th>Name</th>
-                                <th>Email</th>
                                 <th>Mobile</th>
+                                <th>Account Name</th>
                                 <th>Account Number</th>
+                                <th>Bank Branch</th>
                                 <th style="width: 200px; text-align: center">Action</th>
                             </tr>
                             </thead>
@@ -90,14 +91,15 @@
                                     </td>
                                     <td class="sort-city">{{ $student->gsp_id }}</td>
                                     <td class="sort-city">{{ $student->user?->name }}</td>
-                                    <td class="sort-city">{{ $student->user?->email }}</td>
                                     <td class="sort-city">{{ $student->user?->mobile }}</td>
+                                    <td class="sort-city">{{ $student->bank_account_title }}</td>
                                     <td class="sort-city">
                                         <a id="externalLink"
                                            href="{{ asset('storage/'.$student->app_id.'/'.$student->bank_statement) }}">{{ $student->bank_account_number }}</a>
                                     </td>
+                                    <td class="sort-city">{{ $student->bank_branch }}</td>
                                     <td class="sort-city">
-                                        <a href="{{ route('students.view_single',$student->id) }}"
+                                        <a target="_blank" href="{{ route('students.view_single',$student->id) }}"
                                            class="btn btn-sm btn-yellow">
                                             View
                                         </a>
@@ -105,7 +107,7 @@
                                            class="btn btn-sm btn-pink">
                                             Verify
                                         </a>
-                                        <a href="{{ route('students.edit',$student->id) }}"
+                                        <a target="_blank" href="{{ route('students.edit',$student->id) }}"
                                            class="btn btn-sm btn-indigo">
                                             Edit
                                         </a>

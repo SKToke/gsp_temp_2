@@ -25,6 +25,8 @@
                             <span class="badge bg-primary">Verified</span>
                         @else
                             <span class="badge bg-danger">Not Verified</span>
+                            <a href="{{ route('students.verify',$student->id) }}"
+                               class="btn btn-success mx-5">Verify</a>
                         @endif
                     </h2>
                 </div>
