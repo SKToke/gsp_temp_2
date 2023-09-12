@@ -18,7 +18,7 @@ if (!function_exists('generateRandomString')) {
     function generateRandomString(int $length = 8): string
     {
         $characters = '0123456789';
-        $characters .= 'abcdefghijklmnopqrstuvwxyz';
+//        $characters .= 'abcdefghijklmnopqrstuvwxyz';
 //        $characters .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $characters .= '0123456789';
         $randomString = '';
@@ -50,7 +50,7 @@ if (!function_exists('updateStudent')) {
                 deleteFiles($file);
             }
             $file = $attributes['studentship_certificate'];
-            $fileName = 'studentship_certificate.' . $file->getClientOriginalExtension();
+            $fileName = 'studentship_certificate__' . rand(1, 99) . '.' . $file->getClientOriginalExtension();
             $file->storeAs($student->app_id, $fileName, 'public');
             $student->studentship_certificate = $fileName;
         }
@@ -60,7 +60,7 @@ if (!function_exists('updateStudent')) {
                 deleteFiles($file);
             }
             $file = $attributes['bank_statement'];
-            $fileName = 'bank_statement.' . $file->getClientOriginalExtension();
+            $fileName = 'bank_statement__' . rand(1, 99) . '.' . $file->getClientOriginalExtension();
             $file->storeAs($student->app_id, $fileName, 'public');
             $student->bank_statement = $fileName;
         }
@@ -70,7 +70,7 @@ if (!function_exists('updateStudent')) {
                 deleteFiles($file);
             }
             $file = $attributes['award_letter'];
-            $fileName = 'award_letter.' . $file->getClientOriginalExtension();
+            $fileName = 'award_letter__' . rand(1, 99) . '.' . $file->getClientOriginalExtension();
             $file->storeAs($student->app_id, $fileName, 'public');
             $student->award_letter = $fileName;
             $student->is_updated = 2;

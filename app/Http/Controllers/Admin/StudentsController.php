@@ -197,19 +197,19 @@ class StudentsController extends Controller
                 }
                 if (!empty($attributes['studentship_certificate']) && is_file($attributes['studentship_certificate'])) {
                     $file = $attributes['studentship_certificate'];
-                    $fileName = 'studentship_certificate.' . $file->getClientOriginalExtension();
+                    $fileName = 'studentship_certificate__' . rand(1, 99) . '.' . $file->getClientOriginalExtension();
                     $file->storeAs($student->app_id, $fileName, 'public');
                     $student->studentship_certificate = $fileName;
                 }
                 if (!empty($attributes['bank_statement']) && is_file($attributes['bank_statement'])) {
                     $file = $attributes['bank_statement'];
-                    $fileName = 'bank_statement.' . $file->getClientOriginalExtension();
+                    $fileName = 'bank_statement__' . rand(1, 99) . '.' . $file->getClientOriginalExtension();
                     $file->storeAs($student->app_id, $fileName, 'public');
                     $student->bank_statement = $fileName;
                 }
                 if (!empty($attributes['award_letter']) && is_file($attributes['award_letter'])) {
                     $file = $attributes['award_letter'];
-                    $fileName = 'award_letter.' . $file->getClientOriginalExtension();
+                    $fileName = 'award_letter__' . rand(1, 99) . '.' . $file->getClientOriginalExtension();
                     $file->storeAs($student->app_id, $fileName, 'public');
                     $student->award_letter = $fileName;
                 }
